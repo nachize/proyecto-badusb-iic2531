@@ -84,7 +84,7 @@ A continuación, se presentan las capturas de pantalla que documentan el comport
 **Mitigación Activa por Endpoint Detection and Response (EDR)**
 
 ![Bloqueo Windows Defender](evidencias/defender_bloqueo.png)
-*Figura 4: Mitigación activa por Windows Defender. El motor antimalware detectó y bloqueó el payload de descarga clasificándolo como "Caballo de Troya". Se observa en la línea de comandos la cadena ofuscada en Base64 (Fase 2), demostrando que, aunque la ofuscación evade la detección básica, las soluciones EDR modernas siguen detectando y bloqueando comportamientos maliciosos asociados a la descarga de archivos.*
+*Figura 4: Mitigación activa por Endpoint Detection and Response (EDR). Windows Defender detecta y bloquea el payload de descarga clasificándolo como "Caballo de Troya". Se observa en la línea de comandos (CMD) el comando que el sistema interceptó, demostrando que, aunque el atacante intente ocultar la ejecución, las soluciones EDR modernas analizan el comportamiento en memoria y bloquean las descargas maliciosas en segundo plano.*
 
 ## 6. Mitigaciones Propuestas (Defensa en Profundidad)
 
