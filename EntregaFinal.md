@@ -3,6 +3,7 @@
 **Curso:** Seguridad Computacional (IIC2531)  
 **Integrantes:** Paolo Rojas, Rafael Uribe, Matías Vergara  
 **Fecha:** Noviembre de 2026
+**Repositorio:** https://github.com/nachize/proyecto-badusb-iic2531
 
 ## 1. Introducción y Relevancia del Problema
 
@@ -108,6 +109,8 @@ El proyecto demostró empíricamente la peligrosidad del vector de ataque BadUSB
 No obstante, el estudio también validó la eficacia de la defensa en profundidad: el aislamiento de sesión (Secure Desktop) bloqueó el ataque al 100% con la pantalla bloqueada, y las soluciones EDR modernas detuvieron el acceso a datos críticos cifrados (contraseñas). La lección principal es que la confianza ciega en la identidad declarada por un dispositivo físico es una vulnerabilidad crítica, que debe ser mitigada mediante el control estricto de puertos USB (GPO/USBGuard) y la concientización del usuario sobre la seguridad física de sus equipos.
 
 ## Anexo: Estructura del Repositorio Entregado
+
+El código fuente, los scripts anonimizados y las evidencias visuales están disponibles en: https://github.com/nachize/proyecto-badusb-iic2531
 
 El material de respaldo del proyecto se organiza en la siguiente estructura de archivos y directorios:
 
